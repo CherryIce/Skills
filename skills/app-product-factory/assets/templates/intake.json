@@ -1,0 +1,37 @@
+{
+  "app_name": "[填写产品展示名]",
+  "working_name": "[填写 Flutter project name]",
+  "target_user": "[填写具体目标用户]",
+  "problem": "[填写高频且有代价的问题]",
+  "product_promise": "[填写产品承诺]",
+  "core_loop": "[填写从输入到耐久输出的完整闭环]",
+  "durable_output": "[填写用户可保留或交付的输出]",
+  "scope": "mvp",
+  "platform": "Flutter，iOS 与 Android；App Store 单独评估 iOS",
+  "launch_regions": [
+    "[填写首发国家或地区]"
+  ],
+  "languages": [
+    "zh-Hans",
+    "en"
+  ],
+  "monetization": "免费且无 IAP；如有变化必须重新审核",
+  "account_model": "无账号",
+  "backend_model": "离线优先，无应用自有后台",
+  "data_handling": "[填写数据来源、存储位置、传输、删除、导出与恢复边界]",
+  "sensitive_data": "[填写是否处理个人、健康、金融、儿童或其他敏感数据]",
+  "permissions": [
+    "[填写权限及触发时机；没有则写无]"
+  ],
+  "user_generated_content": false,
+  "minimum_ios_assumption": "[填写最低 iOS 假设，最终以真机和当前提交要求为准]",
+  "visual_direction": "[填写原创视觉方向，不引用竞品品牌或截图]",
+  "reference_products": [
+    "[填写参考产品 URL]"
+  ],
+  "forbidden_actions": [
+    "不创建或修改生产证书和账号",
+    "不上传 App Store Connect",
+    "不提交审核"
+  ]
+}
