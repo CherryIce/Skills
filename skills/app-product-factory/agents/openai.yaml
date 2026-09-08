@@ -1,0 +1,6 @@
+interface:
+  display_name: "App Product Factory"
+  short_description: "Flutter App 孵化、差异化评审与上架预检"
+  default_prompt: "使用 $app-product-factory 根据需求完成竞品分析、Flutter MVP 设计实现、功能审核和上架预检。"
+policy:
+  allow_implicit_invocation: false
