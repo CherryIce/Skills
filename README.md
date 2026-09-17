@@ -29,12 +29,12 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
   --path skills/app-product-factory
 ```
 
-To install the immutable `v1.1.0` release instead of the latest `main` branch:
+To install the immutable `v1.2.0` release instead of the latest `main` branch:
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
   --repo CherryIce/Skills \
-  --ref v1.1.0 \
+  --ref v1.2.0 \
   --path skills/app-product-factory
 ```
 
@@ -63,6 +63,10 @@ $app-product-factory
 `app-product-factory` does not authorize purchases, account changes, production certificate changes, deployment, App Store Connect upload, or review submission. Those actions require separate, explicit user confirmation.
 
 Generated templates and mechanical preflight results are evidence scaffolds, not legal advice or a guarantee of App Store approval.
+
+## Learning loop
+
+Each invoked run can leave a project-local `docs/factory/RETROSPECTIVE.json` recording observed outcomes, failures, and untested layers. If prior record paths are explicitly supplied through `learning_records`, the included summarizer identifies recurring patterns for human review. It does not scan other projects, modify the Skill, or publish updates automatically. Adopting a proposed improvement requires a separate Skill-maintenance decision and validation.
 
 ## Repository layout
 

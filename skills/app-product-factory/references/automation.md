@@ -88,7 +88,7 @@ Launch the frozen build on the smallest relevant simulator/device matrix. At min
 
 Capture screenshots only after the intended state is visible and the last relevant UI change is built. Record device ID, OS, build mode, app version, action path, result, timestamp, and limitations. A simulator capture is runtime evidence, not automatically valid App Store marketing material. If another task uses the device, isolate the destination or mark runtime evidence unavailable rather than risking a misleading termination.
 
-For `mvp` or `audit`, stop here after the Functional Reviewer updates the evidence register and gap backlog. Continue only when `release_candidate` is the selected scope.
+For `mvp` or `audit`, skip release preflight and proceed to the retrospective after the Functional Reviewer updates the evidence register and gap backlog. Continue to release preflight only when `release_candidate` is the selected scope.
 
 ## 7. Mechanical release preflight (`release_candidate` only)
 
@@ -111,3 +111,15 @@ Replace every placeholder argument before running. The preflight checks local so
 Store Reviewer reads the latest mechanical reports, final code/release evidence, and current official Apple sources. Complete `APP_STORE_PREFLIGHT.md`, `EVIDENCE_REGISTER.md`, `GAP_BACKLOG.md`, privacy-policy draft, and review-notes draft without overstating evidence.
 
 Stop at `candidate`, `high_risk`, or `blocked`. Upload, signing-account changes, App Store Connect changes, pricing, agreements, and review submission require explicit user confirmation.
+
+## 9. Retrospective and optional cross-run comparison
+
+At the requested stopping point, fill `docs/factory/RETROSPECTIVE.json` with actual outcomes, limits, and evidence-backed lessons; see [learning-loop.md](learning-loop.md). If the intake explicitly lists prior `learning_records`, compare only those paths with the current completed record:
+
+```bash
+python3 scripts/summarize_factory_lessons.py \
+  /absolute/path/to/prior/docs/factory/RETROSPECTIVE.json \
+  /absolute/path/to/current/docs/factory/RETROSPECTIVE.json
+```
+
+The summary flags patterns for human review, not automatic Skill edits. Do not copy private project reports to the public Skill repository, and do not update, push, tag, or publish the Skill as a side effect of an app run.

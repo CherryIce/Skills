@@ -29,6 +29,7 @@
   "reference_products": [
     "[填写参考产品 URL]"
   ],
+  "learning_records": [],
   "forbidden_actions": [
     "不创建或修改生产证书和账号",
     "不上传 App Store Connect",

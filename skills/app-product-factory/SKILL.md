@@ -45,6 +45,7 @@ Read [references/workflow.md](references/workflow.md) for phase gates and iterat
 - Before any App Store assessment, read [references/app-store-preflight.md](references/app-store-preflight.md) and verify current official Apple requirements live.
 - When producing persistent project documents, read [references/artifacts.md](references/artifacts.md) and adapt its schemas to the repository.
 - For `mvp` or `release_candidate` runs, read [references/automation.md](references/automation.md) and use its scripts/templates for repeatable mechanical steps.
+- Before closing an invoked run, read [references/learning-loop.md](references/learning-loop.md) for its evidence-based retrospective. Compare prior runs only when their record paths are explicitly supplied.
 
 Never implement a concept that fails the originality gate. Return it for product revision with concrete alternative directions instead.
 
@@ -56,6 +57,7 @@ Never implement a concept that fails the originality gate. Return it for product
 - Only for `release_candidate`, before Store Reviewer writes the final assessment, use `scripts/flutter_release_preflight.py` to record mechanical release blockers, hashes, archive contents, privacy manifests, identifiers, icon, and screenshot properties.
 - Do not use `--force` to replace existing project reports unless their replacement is intentional and reviewed.
 - Script results inform reviewers but never decide originality, legal compliance, live URL content, device behavior, or store approval.
+- A completed run may create a project-local `docs/factory/RETROSPECTIVE.json`. `scripts/summarize_factory_lessons.py` summarizes only explicitly supplied records; it never edits the skill, scans other projects, or publishes anything.
 
 ## Roles and independence
 
@@ -110,4 +112,5 @@ Report:
 - store-readiness verdict by guideline/risk;
 - validation performed by evidence layer;
 - remaining gaps and the next highest-value revision;
+- retrospective location and any evidence-backed Skill improvement candidate (or `none`); do not present a candidate as an adopted rule;
 - external actions that still require explicit user confirmation.

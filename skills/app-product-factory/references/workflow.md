@@ -89,3 +89,9 @@ Gate: the revision has observable acceptance criteria and does not introduce a n
 Verify production identifiers and icons, signing assumptions, privacy manifests and declarations, public privacy/support URLs, metadata, screenshots, reviewer access, backend availability, on-device behavior, archive contents, and any IAP products.
 
 Gate: “release candidate” only. Uploading, submitting, pricing, agreements, certificates, and production mutations require explicit user confirmation.
+
+## Phase 9: Run retrospective (all scopes)
+
+At the requested stopping point, summarize observed outcomes, failures, and untested layers. When project writes are in scope, complete `docs/factory/RETROSPECTIVE.json` using [learning-loop.md](learning-loop.md); otherwise include the same concise facts in the final response without creating a file. A blocked run may still be honestly marked `completed` as a retrospective of the attempted work; the product verdict remains blocked.
+
+Gate: lessons refer to reproducible observations and evidence, not unsupported guesses. Any proposed Skill change remains a candidate until separately reviewed and tested; never edit or publish the Skill as a side effect of building an app.

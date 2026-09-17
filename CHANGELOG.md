@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.2.0 — 2026-09-17
+
+- Add project-local, structured retrospectives for each invoked run, with explicit outcomes and evidence limits.
+- Add an opt-in cross-run lesson summarizer that reads only supplied records and distinguishes repeat attempts in one project from independent project evidence.
+- Keep Skill changes, Git pushes, tags, and releases behind separate human review; retrospective candidates are never auto-adopted.
+- Add behavioral tests for the retrospective scaffold and candidate-summary thresholds.
+
 ## v1.1.0 — 2026-09-17
 
 - Add UI and interaction acceptance guidance for information hierarchy, realistic content, small screens, accessibility settings, and rendered-screen review.

@@ -33,3 +33,7 @@ Each item contains source finding, user value, policy/differentiation effect, sc
 ## Release-candidate report
 
 Record branch and SHA, dirty state, Flutter/Xcode versions, flavor and entry point, checks run, simulator/device coverage, archive identifiers and contents, public URLs, metadata status, upload/TestFlight/App Review state, and unresolved external actions.
+
+## Factory retrospective
+
+For a writable run, complete `docs/factory/RETROSPECTIVE.json` after the requested stopping point. Keep the run outcome separate from product/release verdicts. Link each lesson to a direct observation, affected phase, root-cause confidence, and an observable regression check. Follow [learning-loop.md](learning-loop.md); this project-local record is not automatically shared across projects or promoted into Skill instructions.

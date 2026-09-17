@@ -33,15 +33,18 @@ REQUIRED_KEYS = (
 )
 SCOPE_TEMPLATES = {
     "discovery": {
+        "docs/factory/RETROSPECTIVE.json.tmpl",
         "docs/product/MARKET_EVIDENCE.md.tmpl",
         "docs/product/DIFFERENTIATION.md.tmpl",
     },
     "product_design": {
+        "docs/factory/RETROSPECTIVE.json.tmpl",
         "docs/product/MARKET_EVIDENCE.md.tmpl",
         "docs/product/PRODUCT_BRIEF.md.tmpl",
         "docs/product/DIFFERENTIATION.md.tmpl",
     },
     "mvp": {
+        "docs/factory/RETROSPECTIVE.json.tmpl",
         "docs/product/MARKET_EVIDENCE.md.tmpl",
         "docs/product/PRODUCT_BRIEF.md.tmpl",
         "docs/product/DIFFERENTIATION.md.tmpl",
@@ -50,6 +53,7 @@ SCOPE_TEMPLATES = {
         "docs/release/GAP_BACKLOG.md.tmpl",
     },
     "audit": {
+        "docs/factory/RETROSPECTIVE.json.tmpl",
         "docs/product/MARKET_EVIDENCE.md.tmpl",
         "docs/product/PRODUCT_BRIEF.md.tmpl",
         "docs/product/DIFFERENTIATION.md.tmpl",
@@ -58,6 +62,7 @@ SCOPE_TEMPLATES = {
         "docs/release/GAP_BACKLOG.md.tmpl",
     },
     "release_candidate": {
+        "docs/factory/RETROSPECTIVE.json.tmpl",
         "docs/product/MARKET_EVIDENCE.md.tmpl",
         "docs/product/PRODUCT_BRIEF.md.tmpl",
         "docs/product/DIFFERENTIATION.md.tmpl",
