@@ -40,6 +40,7 @@ Read [references/workflow.md](references/workflow.md) for phase gates and iterat
 
 - Before approving a concept or proposing extra features, read [references/differentiation.md](references/differentiation.md).
 - Before creating or changing Flutter code, or claiming build/runtime validation, read [references/flutter-delivery.md](references/flutter-delivery.md).
+- For `product_design`, `mvp`, or a UI-focused `audit`, read [references/ui-acceptance.md](references/ui-acceptance.md) before approving layouts or visual quality.
 - Before functional review, release-candidate work, or claiming feature completeness, read [references/functional-review.md](references/functional-review.md).
 - Before any App Store assessment, read [references/app-store-preflight.md](references/app-store-preflight.md) and verify current official Apple requirements live.
 - When producing persistent project documents, read [references/artifacts.md](references/artifacts.md) and adapt its schemas to the repository.
@@ -51,6 +52,7 @@ Never implement a concept that fails the originality gate. Return it for product
 
 - Use `scripts/bootstrap_factory_run.py` to initialize the selected scope's honest `not_evaluated` documents from `assets/templates/`; never treat generated scaffolds as evidence.
 - After the implementation/revision loop is frozen, use `scripts/flutter_quality_gate.py` for non-mutating format checks, analyzer, tests, and only the locally requested builds.
+- A passing quality-gate script is not UI or runtime acceptance. Before calling an MVP complete, execute the app's core path and inspect the rendered screens, including content stress, overlays, and safe areas; record any untested device/locale/state explicitly.
 - Only for `release_candidate`, before Store Reviewer writes the final assessment, use `scripts/flutter_release_preflight.py` to record mechanical release blockers, hashes, archive contents, privacy manifests, identifiers, icon, and screenshot properties.
 - Do not use `--force` to replace existing project reports unless their replacement is intentional and reviewed.
 - Script results inform reviewers but never decide originality, legal compliance, live URL content, device behavior, or store approval.
@@ -104,6 +106,7 @@ Report:
 - differentiation verdict and why;
 - artifacts and code changed;
 - functional-review verdict;
+- UI/interaction-acceptance verdict and the screens, states, and devices actually inspected;
 - store-readiness verdict by guideline/risk;
 - validation performed by evidence layer;
 - remaining gaps and the next highest-value revision;

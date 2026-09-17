@@ -20,6 +20,8 @@ Each finding includes the affected requirement/flow, evidence, file or screen wh
 - Empty, loading, partial, stale, error, permission-denied, offline, and destructive-action states are understandable.
 - Data import/export, backup/restore, deletion, and conflict behavior protect user work where the product promises them.
 - Touch targets, contrast, semantics, keyboard/focus, screen readers, text scaling, reduced motion, and orientation are appropriate.
+- Core information and actions are visibly readable and reachable with representative data, long user content, small screens, supported languages, large text, keyboard, sheets, and bottom safe areas. Check rendered screens, not only widget structure or theme tokens.
+- New modal/route flows survive tap-outside or back dismissal, closing animation, reopening, and state transitions without framework exceptions, disposed resources, or unintended writes.
 - Supported languages fit real layouts and do not fall back to internal keys or misleading translations.
 - Permissions are requested just in time, have complete purpose strings, and have usable denial alternatives when possible.
 - Account creation, authentication, logout, deletion, and credential revocation are internally consistent when present.
@@ -27,5 +29,6 @@ Each finding includes the affected requirement/flow, evidence, file or screen wh
 - User-generated content includes the necessary moderation, reporting, blocking, and age controls when present.
 - Tests assert meaningful outcomes instead of mirroring implementation details.
 - Screenshots and metadata claims are reproducible in the reviewed build.
+- A runtime termination is classified from first exception and device/process evidence; do not attribute a shared simulator shutdown or stale generated build path to app logic without proof.
 
 Verdict is `passed`, `needs_revision`, or `blocked`. Passing requires no open P0/P1; it does not establish store approval.

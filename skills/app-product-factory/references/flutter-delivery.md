@@ -6,6 +6,7 @@ Read this before writing Flutter code or claiming build/runtime validation.
 
 - Prefer the repository's pinned Flutter or FVM version and existing dependency strategy.
 - Check `pubspec.yaml`, `pubspec.lock`, Dart SDK constraints, flavors, platform targets, and generated files before edits.
+- If the project was moved or copied, check generated Flutter/Xcode/CocoaPods paths before diagnosing missing headers or plugins as source defects. Regenerate only the affected local build artifacts with the project's pinned toolchain; do not upgrade dependencies as a first response.
 - Keep business logic in testable Dart layers. Isolate platform channels and third-party SDKs behind narrow interfaces.
 - Follow the project's existing state-management, navigation, persistence, localization, and design-system patterns unless the approved PRD requires a change.
 - Do not add a backend, account system, analytics, advertising, subscription, or online AI merely to create apparent product depth.
@@ -31,6 +32,12 @@ Choose commands supported by the project and report exact versions, target, and 
 6. simulator/emulator launch and key-path interaction;
 7. physical-device checks for permissions, camera, notifications, sharing, lifecycle, offline, performance, and accessibility;
 8. signed Release/Archive and final bundle inspection when release-candidate work is requested.
+
+For simulator evidence, use an available destination that is not being shut down or rebuilt by another task. Record the device ID, OS, build mode, and launch result. If Xcode reports `SIGTERM` or a framework assertion, inspect the first exception and process/device logs before calling it an app crash; a shared simulator shutdown or stale generated path is a different failure class. Never disturb another active test session merely to reuse its device.
+
+Automated widget tests should cover the actual interaction sequence for new routes, dialogs, sheets, and text inputs: open, edit if relevant, cancel or dismiss (including the barrier/back action), wait for exit animation, then reopen. Own controllers, focus nodes, and animation resources for at least as long as the widgets/routes that use them. Assert no uncaught framework exception and no unintended data mutation. Add one regression case for each reproduced failure, not a catalog of speculative cases.
+
+Run the visual acceptance cases in [ui-acceptance.md](ui-acceptance.md) on rendered screens. Recheck affected screens after fixes; a screenshot taken before the last UI change is stale evidence.
 
 Do not run dependency upgrades, CocoaPods updates, production signing changes, or broad generated-file rewrites unless required and within scope. An explicitly requested Android debug build may create or use a local debug keystore; record that side effect and never treat it as release-signing evidence. For iOS CocoaPods projects, use `Runner.xcworkspace`. Use temporary DerivedData for diagnosis when appropriate.
 

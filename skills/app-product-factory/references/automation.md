@@ -36,6 +36,8 @@ For a greenfield app, use Flutter's own scaffold with explicit platforms, organi
 
 Implement domain model and repository boundaries before UI breadth. Exercise cancellation, invalid input, partial state, save failures, recovery, destructive actions, re-evaluation after changes, and bounded resource usage. Run focused tests during each slice.
 
+Before treating a screen as finished, review a rendered state against the PRD's information hierarchy and the cases in `ui-acceptance.md`. Include realistic and stress content, not only the empty/default state. For new sheets or dialogs, add a widget regression that opens, dismisses during normal interaction, waits for the transition, and reopens without an exception or data change.
+
 ## 4. Functional review and revision
 
 Freeze a coherent first implementation and send it to an independent Functional Reviewer. Keep findings open until an acceptance test passes. A previous successful run benefited most from checking:
@@ -82,9 +84,9 @@ If a step fails, fix only the relevant scope and run a new timestamped gate. Do 
 
 ## 6. Runtime evidence
 
-Launch the frozen build on the smallest relevant simulator/device matrix. At minimum, inspect phone and tablet layouts when both are supported, primary language variants, dark mode, large text, empty/data/error states, and the full core loop. For platform integrations, add physical-device evidence when simulator behavior is insufficient.
+Launch the frozen build on the smallest relevant simulator/device matrix. At minimum, inspect phone and tablet layouts when both are supported, primary language variants, dark mode, large text, empty/data/error states, and the full core loop. Inspect dense/long content, keyboard and overlay dismissal, scroll reachability, and bottom safe areas where present. For platform integrations, add physical-device evidence when simulator behavior is insufficient.
 
-Capture screenshots only after the intended state is visible. Record device, OS, build mode, app version, action path, result, timestamp, and limitations. A simulator capture is runtime evidence, not automatically valid App Store marketing material.
+Capture screenshots only after the intended state is visible and the last relevant UI change is built. Record device ID, OS, build mode, app version, action path, result, timestamp, and limitations. A simulator capture is runtime evidence, not automatically valid App Store marketing material. If another task uses the device, isolate the destination or mark runtime evidence unavailable rather than risking a misleading termination.
 
 For `mvp` or `audit`, stop here after the Functional Reviewer updates the evidence register and gap backlog. Continue only when `release_candidate` is the selected scope.
 

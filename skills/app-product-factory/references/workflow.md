@@ -60,19 +60,23 @@ Produce the smallest PRD that fully describes:
 
 Create an original visual direction. Do not reproduce a competitor screenshot or layout pixel-for-pixel.
 
-Gate: each core claim maps to an interaction, state, data owner, and acceptance criterion.
+Before coding, specify the task-first information hierarchy and how long labels, real data volume, empty states, bottom controls, keyboard, and modal content remain readable and reachable. Use [ui-acceptance.md](ui-acceptance.md) to turn the design into observable acceptance cases; a color palette or theme file alone is not a layout design.
+
+Gate: each core claim maps to an interaction, state, data owner, and acceptance criterion; the UI cases cover content density and reachability on the supported form factors.
 
 ## Phase 5: Flutter MVP
 
 Implement vertical slices, starting with the smallest end-to-end loop. Keep generated/demo content clearly separated from release content. After each slice, run the narrowest useful validation before broadening.
 
-Gate: the core loop builds, launches, persists or transmits data as designed, and has meaningful automated coverage.
+For each new navigation or overlay pattern, exercise the user action sequence through completion, cancel, dismiss, and re-entry. Run automated tests for meaningful transitions and inspect the actual rendered result; analyzer/build success cannot close layout or lifecycle findings.
+
+Gate: the core loop builds, launches, persists or transmits data as designed, has meaningful automated coverage, and has a recorded UI/runtime inspection for its primary screens. If a required device or state cannot be inspected, mark that evidence layer untested rather than passing it.
 
 ## Phase 6: Independent reviews
 
 Run Functional Reviewer first, then Store Reviewer. Reviewers report findings with severity, evidence, affected flows/files, and an acceptance test for the fix. They do not edit.
 
-Gate: no unresolved blocker or high-severity finding. Medium findings must be accepted explicitly or placed in the revision plan.
+Gate: no unresolved blocker or high-severity finding, including clipped/unreachable core actions or repeatable interaction exceptions. Medium findings must be accepted explicitly or placed in the revision plan.
 
 ## Phase 7: Gap iteration
 
