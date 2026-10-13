@@ -36,7 +36,7 @@ For a greenfield app, use Flutter's own scaffold with explicit platforms, organi
 
 Implement domain model and repository boundaries before UI breadth. Exercise cancellation, invalid input, partial state, save failures, recovery, destructive actions, re-evaluation after changes, and bounded resource usage. Run focused tests during each slice.
 
-Before treating a screen as finished, review a rendered state against the PRD's information hierarchy and the cases in `ui-acceptance.md`. Include realistic and stress content, not only the empty/default state. For new sheets or dialogs, add a widget regression that opens, dismisses during normal interaction, waits for the transition, and reopens without an exception or data change.
+Before treating a screen as finished, review a rendered state against the PRD's information hierarchy and the cases in `ui-acceptance.md`. Include realistic and stress content, not only the empty/default state. Verify the clean-state system language/appearance behavior, English fallback, explicit-override persistence, scroll-end safe inset, and default iOS-style dialogs where applicable. For new sheets or dialogs, add a widget regression that opens, dismisses during normal interaction, waits for the transition, and reopens without an exception or data change.
 
 ## 4. Functional review and revision
 

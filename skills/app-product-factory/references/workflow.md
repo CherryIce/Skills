@@ -55,12 +55,14 @@ Produce the smallest PRD that fully describes:
 - domain model and persistence boundaries;
 - permission timing, privacy, account, payment, and deletion behavior;
 - accessibility, Dynamic Type, dark mode, localization, empty/loading/error/offline states;
+- initial system-following locale/appearance, English fallback, and persistence only after explicit user overrides;
+- iOS-style dialog/action-sheet defaults and any justified product-specific exception;
 - analytics only if necessary and disclosed;
 - acceptance criteria traceable to the core loop.
 
 Create an original visual direction. Do not reproduce a competitor screenshot or layout pixel-for-pixel.
 
-Before coding, specify the task-first information hierarchy and how long labels, real data volume, empty states, bottom controls, keyboard, and modal content remain readable and reachable. Use [ui-acceptance.md](ui-acceptance.md) to turn the design into observable acceptance cases; a color palette or theme file alone is not a layout design.
+Before coding, specify the task-first information hierarchy and how long labels, real data volume, empty states, bottom controls, keyboard, and modal content remain readable and reachable. For scrollable pages, design a dynamic trailing content inset that keeps the final content above the system gesture region without partitioning the viewport with fixed blank space. Use [ui-acceptance.md](ui-acceptance.md) to turn the design into observable acceptance cases; a color palette or theme file alone is not a layout design.
 
 Gate: each core claim maps to an interaction, state, data owner, and acceptance criterion; the UI cases cover content density and reachability on the supported form factors.
 

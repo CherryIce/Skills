@@ -20,6 +20,8 @@ Build an independent product, not a reskinned or duplicate app. Treat competitor
 - Keep platform-specific Swift, Objective-C, Kotlin, or Java code limited to integrations Flutter cannot correctly provide on its own.
 - When the request is about Apple review, build a portable Flutter product but evaluate the iOS target and App Store evidence separately.
 - Prefer a small complete user workflow over a large collection of disconnected features.
+- For generated products, let language and light/dark appearance follow the system until the user explicitly selects an override. Match supported system locales and fall back to English when none match; persist only explicit overrides, and clear them when the user returns to “follow system.”
+- Use iOS-style alert, confirmation, and action-sheet presentation by default unless the approved product design explicitly requires another convention.
 - Preserve unrelated work and existing project conventions. Inspect the Git root, branch, dirty state, Flutter/FVM version, lockfiles, targets, and existing product capabilities before editing.
 
 ## Choose the run scope

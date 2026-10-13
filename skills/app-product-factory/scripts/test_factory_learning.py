@@ -88,6 +88,11 @@ class LearningTests(unittest.TestCase):
             self.assertEqual(scaffold["status"], "not_evaluated")
             self.assertEqual(scaffold["lessons"], [])
             self.assertTrue((project / "docs/release/FUNCTIONAL_REVIEW.md").exists())
+            brief = (project / "docs/product/PRODUCT_BRIEF.md").read_text(encoding="utf-8")
+            self.assertIn("默认跟随系统；匹配支持的系统语言，无法匹配时回退英文", brief)
+            self.assertIn("默认跟随系统 light/dark", brief)
+            self.assertIn("滚动视口使用可用空间", brief)
+            self.assertIn("默认使用 iOS/Cupertino 风格弹框", brief)
 
 
 if __name__ == "__main__":

@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.3.0 — 2026-10-13
+
+- Default generated bilingual products to system-following locale resolution with English fallback and persistence only for explicit user overrides.
+- Default appearance to system light/dark until the user explicitly selects and persists an override.
+- Define scroll-end safe-area behavior as dynamic trailing content inset rather than a fixed blank partition, with no double-counted bottom obstruction.
+- Default alert, confirmation, destructive-choice, and action-sheet presentation to iOS/Cupertino style.
+
 ## v1.2.0 — 2026-09-17
 
 - Add project-local, structured retrospectives for each invoked run, with explicit outcomes and evidence limits.

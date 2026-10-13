@@ -8,6 +8,8 @@ For each primary screen, state the user's next decision, the one action that mat
 
 Specify a content policy for filenames, translated labels, user-entered text, counts, lists, tables, and errors. Important values should wrap, expand, or open a detail view rather than disappear behind unexplained ellipses. Use representative data and at least one stressful but supported case; do not design only for a short English placeholder or an empty screen.
 
+Unless the PRD explicitly overrides the factory defaults, design the initial experience with no stored language or appearance override: Chinese system locales resolve to the supported Chinese localization, other supported locales resolve to their matching localization, unsupported locales fall back to English, and appearance follows system light/dark changes. Only a user's explicit language or appearance selection is retained; choosing “follow system” clears the retained override. Default alert, confirmation, destructive-choice, and action-sheet surfaces to an iOS/Cupertino visual hierarchy.
+
 ## Rendered-screen acceptance
 
 Inspect the actual running UI, not just source, theme tokens, or a passing widget tree. Choose a small matrix from the supported product surfaces:
@@ -18,6 +20,10 @@ Inspect the actual running UI, not just source, theme tokens, or a passing widge
 - bottom navigation/actions, scroll end, keyboard visible, and modal or sheet states when present.
 
 For each relevant case, check that the primary task and next action are obvious, required content is readable, controls do not collide or clip, all actions remain reachable by scrolling or navigation, safe areas and keyboard do not cover controls, and the layout remains balanced without excessive blank or repeated chrome. Inspect the visible screen and the scrolled end; the first viewport alone cannot prove reachability. A screenshot supports visual review only for the state and build it depicts.
+
+For a scrollable page, reject a solution that turns the bottom safe area into a permanent blank partition or shortens the whole viewport unnecessarily. The scrollable content should use the available viewport, with a dynamic trailing content inset derived from the current system safe area so the last item or action can scroll completely above the gesture indicator. Check that the design gap and the system inset are not blindly summed, that fixed bottom navigation/actions and keyboard insets are not counted twice, and that changes in orientation or system UI recompute the layout.
+
+Verify preference behavior from a clean install or cleared state: launch under Chinese, English, one other supported locale when present, and an unsupported locale; toggle the OS appearance while still following system; make and relaunch with explicit language/light/dark choices; then return to “follow system” and confirm later OS changes apply. Inspect default dialogs in both languages and appearances for iOS-style hierarchy, localized actions, correct destructive emphasis, accessible focus, cancellation, and reopen behavior.
 
 Record screen, device/size, locale, text scale, appearance, content state, action path, screenshot or observation, and finding. Fix the highest-impact issue, rebuild, and inspect the affected case again. Treat hidden or unreachable core actions, clipped essential data, and repeatable framework exceptions as blockers. Note untested surfaces honestly; do not label them passed from analyzer or screenshots of another state.
 

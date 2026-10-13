@@ -23,6 +23,9 @@ Each finding includes the affected requirement/flow, evidence, file or screen wh
 - Core information and actions are visibly readable and reachable with representative data, long user content, small screens, supported languages, large text, keyboard, sheets, and bottom safe areas. Check rendered screens, not only widget structure or theme tokens.
 - New modal/route flows survive tap-outside or back dismissal, closing animation, reopening, and state transitions without framework exceptions, disposed resources, or unintended writes.
 - Supported languages fit real layouts and do not fall back to internal keys or misleading translations.
+- With no saved override, language and appearance follow the current system; unsupported locales fall back to English. Only explicit choices persist, and returning to “follow system” removes the override.
+- Scrollable pages use a dynamic trailing inset so the last content/action clears the current bottom system gesture region without a permanent blank partition or double-counted bottom padding.
+- Default alert, confirmation, destructive-choice, and action-sheet surfaces use the specified iOS-style hierarchy and retain correct localization, semantics, dismissal, focus, and reopen behavior.
 - Permissions are requested just in time, have complete purpose strings, and have usable denial alternatives when possible.
 - Account creation, authentication, logout, deletion, and credential revocation are internally consistent when present.
 - Purchases, subscriptions, restore, entitlement loss, cancellation, and offline receipt states are correct when present.
