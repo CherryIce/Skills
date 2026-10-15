@@ -7,6 +7,7 @@ Reusable Codex skills published by CherryIce.
 | Skill | Description | Invocation |
 | --- | --- | --- |
 | `app-product-factory` | Evidence-based product research, differentiation, Flutter MVP delivery, functional review, and App Store preflight | `$app-product-factory` |
+| `app-store-release-kit` | App Store and Google Play listing assets, real-app screenshots, and bilingual website and privacy drafts for one app | `$app-store-release-kit` |
 
 ## Install with Codex
 
@@ -17,9 +18,14 @@ $skill-installer
 
 Install app-product-factory from:
 https://github.com/CherryIce/Skills/tree/main/skills/app-product-factory
+
+Install app-store-release-kit from:
+https://github.com/CherryIce/Skills/tree/main/skills/app-store-release-kit
 ```
 
-The skill becomes available on the next turn after installation. It is explicit-only, so invoke it with `$app-product-factory` whenever you want the workflow to run.
+The installed skill becomes available on the next turn. `app-product-factory` is
+explicit-only, so invoke it with `$app-product-factory`. Invoke the release kit with
+`$app-store-release-kit` when you want release materials for a named app.
 
 ## Install from the command line
 
@@ -27,15 +33,20 @@ The skill becomes available on the next turn after installation. It is explicit-
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
   --repo CherryIce/Skills \
   --path skills/app-product-factory
+
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo CherryIce/Skills \
+  --path skills/app-store-release-kit
 ```
 
-To install the immutable `v1.3.0` release instead of the latest `main` branch:
+To install the immutable `v1.4.0` release instead of the latest `main` branch,
+add `--ref v1.4.0` to either command. For example:
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
   --repo CherryIce/Skills \
-  --ref v1.3.0 \
-  --path skills/app-product-factory
+  --ref v1.4.0 \
+  --path skills/app-store-release-kit
 ```
 
 The installer refuses to overwrite an existing skill directory. Back up and remove or rename an older installation before reinstalling.
@@ -51,16 +62,25 @@ $app-product-factory
 禁止动作：不上传 App Store，不修改生产证书
 ```
 
+```text
+$app-store-release-kit
+
+为 apps/example 生成并检查 App Store 和 Google Play 发布素材。
+```
+
 ## Requirements
 
 - Codex with the built-in `skill-installer` skill, or Python 3 for direct installation.
 - Flutter and Dart when the selected workflow includes implementation or quality gates.
+- Pillow for release-kit screenshot rendering and image validation.
 - macOS and Xcode for iOS build/archive evidence.
 - Network access for current product research and official App Store policy verification.
 
 ## Safety boundary
 
-`app-product-factory` does not authorize purchases, account changes, production certificate changes, deployment, App Store Connect upload, or review submission. Those actions require separate, explicit user confirmation.
+Neither skill automatically authorizes purchases, account changes, production
+certificate changes, deployment, store upload, or review submission. The release
+kit generates and validates materials until a user explicitly asks for publication.
 
 Generated templates and mechanical preflight results are evidence scaffolds, not legal advice or a guarantee of App Store approval.
 
@@ -72,9 +92,14 @@ Each invoked run can leave a project-local `docs/factory/RETROSPECTIVE.json` rec
 
 ```text
 skills/
-└── app-product-factory/
+├── app-product-factory/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── assets/
+│   ├── references/
+│   └── scripts/
+└── app-store-release-kit/
     ├── SKILL.md
-    ├── agents/
     ├── assets/
     ├── references/
     └── scripts/

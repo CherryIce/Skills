@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4.0 — 2026-10-15
+
+- Publish `app-store-release-kit` with per-app fact collection, listing drafts, real-runtime screenshot rendering, bilingual website and privacy templates, and a release-material validation gate.
+- Make the published release kit's script commands work from either a Codex installation or a project-local copy.
+- Document installation and invocation for both available skills.
+
 ## v1.3.0 — 2026-10-13
 
 - Default generated bilingual products to system-following locale resolution with English fallback and persistence only for explicit user overrides.

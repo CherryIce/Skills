@@ -1,0 +1,55 @@
+schema_version: 2
+
+identity:
+  app_name: "[[APP_NAME]]"
+  operator: ""
+  bundle_id: ""
+  android_package: ""
+
+contact:
+  support_email: ""
+  production_domain: ""
+
+platforms:
+  ios:
+    iphone: true
+    ipad: auto
+  android:
+    phone: true
+    tablets: auto
+
+listing:
+  shared_full_description: artifacts/app-store-listing/description-en.txt
+  app_store:
+    primary_locale: en-US
+  google_play:
+    primary_locale: en-US
+    localized_graphics:
+      - en-US
+      - zh-CN
+  tone: clear, specific, trustworthy
+
+privacy:
+  effective_date: ""
+  confirmed: []
+  open_questions: []
+
+website:
+  default_locale: en
+  locales:
+    - en
+    - zh-Hans
+
+screenshots:
+  source_policy: real-runtime-only
+  app_store:
+    locale: en-US
+    scenes: []
+  google_play:
+    locales:
+      - en-US
+      - zh-CN
+    scenes: []
+
+paths:
+  app_root: "[[APP_ROOT]]"

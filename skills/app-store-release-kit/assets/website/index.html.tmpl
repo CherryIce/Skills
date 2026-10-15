@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta id="page-description" name="description" content="[[META_DESCRIPTION_EN]]">
+    <title>[[APP_NAME]] — [[TAGLINE_EN]]</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="site.js" defer></script>
+  </head>
+  <body
+    data-title-en="[[APP_NAME]] — [[TAGLINE_EN]]"
+    data-title-zh="[[APP_NAME]] — [[TAGLINE_ZH]]"
+    data-description-en="[[META_DESCRIPTION_EN]]"
+    data-description-zh="[[META_DESCRIPTION_ZH]]"
+  >
+    <header class="site-header">
+      <a class="brand" href="index.html" data-local-page aria-label="[[APP_NAME]] home">
+        <img src="assets/app-icon.png" alt="" width="52" height="52">
+        <span>[[APP_NAME]]</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#features"><span data-lang="en">Features</span><span data-lang="zh">功能</span></a>
+        <a href="privacy.html" data-local-page><span data-lang="en">Privacy</span><span data-lang="zh">隐私</span></a>
+        <a href="mailto:[[SUPPORT_EMAIL]]"><span data-lang="en">Support</span><span data-lang="zh">支持</span></a>
+      </nav>
+      <div class="language-switch" role="group" aria-label="Language / 语言">
+        <button type="button" data-language-option="en">EN</button>
+        <button type="button" data-language-option="zh">中文</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div data-lang="en">
+          <p class="eyebrow">[[EYEBROW_EN]]</p>
+          <h1>[[TAGLINE_EN]]</h1>
+          <p class="lede">[[HERO_BODY_EN]]</p>
+          <a class="button" href="mailto:[[SUPPORT_EMAIL]]">Contact support</a>
+        </div>
+        <div data-lang="zh">
+          <p class="eyebrow">[[EYEBROW_ZH]]</p>
+          <h1>[[TAGLINE_ZH]]</h1>
+          <p class="lede">[[HERO_BODY_ZH]]</p>
+          <a class="button" href="mailto:[[SUPPORT_EMAIL]]">联系支持</a>
+        </div>
+        <img class="hero-image" src="assets/app-preview.png" alt="" role="presentation">
+      </section>
+
+      <section id="features" class="section">
+        <div data-lang="en">
+          <p class="eyebrow">Built for real work</p>
+          <h2>[[FEATURES_HEADING_EN]]</h2>
+          <div class="feature-grid">
+            <article><h3>[[FEATURE_1_TITLE_EN]]</h3><p>[[FEATURE_1_BODY_EN]]</p></article>
+            <article><h3>[[FEATURE_2_TITLE_EN]]</h3><p>[[FEATURE_2_BODY_EN]]</p></article>
+            <article><h3>[[FEATURE_3_TITLE_EN]]</h3><p>[[FEATURE_3_BODY_EN]]</p></article>
+          </div>
+        </div>
+        <div data-lang="zh">
+          <p class="eyebrow">为真实使用而设计</p>
+          <h2>[[FEATURES_HEADING_ZH]]</h2>
+          <div class="feature-grid">
+            <article><h3>[[FEATURE_1_TITLE_ZH]]</h3><p>[[FEATURE_1_BODY_ZH]]</p></article>
+            <article><h3>[[FEATURE_2_TITLE_ZH]]</h3><p>[[FEATURE_2_BODY_ZH]]</p></article>
+            <article><h3>[[FEATURE_3_TITLE_ZH]]</h3><p>[[FEATURE_3_BODY_ZH]]</p></article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© [[COPYRIGHT_YEAR]] [[OPERATOR]].</span>
+      <span><a href="privacy.html" data-local-page><span data-lang="en">Privacy Policy</span><span data-lang="zh">隐私政策</span></a> · <a href="mailto:[[SUPPORT_EMAIL]]">[[SUPPORT_EMAIL]]</a></span>
+    </footer>
+  </body>
+</html>
