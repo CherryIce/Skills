@@ -20,6 +20,7 @@ Build an independent product, not a reskinned or duplicate app. Treat competitor
 - Keep platform-specific Swift, Objective-C, Kotlin, or Java code limited to integrations Flutter cannot correctly provide on its own.
 - When the request is about Apple review, build a portable Flutter product but evaluate the iOS target and App Store evidence separately.
 - Prefer a small complete user workflow over a large collection of disconnected features.
+- Every generated `mvp` or `release_candidate` app must include an original product-specific App Icon, a platform-native launch screen, and a localized first-run onboarding flow. Do not ship Flutter's default icon. Keep launch presentation immediate and visually continuous with the first Flutter frame; keep onboarding separate, skippable, persist completion or skip, and provide an in-app replay path.
 - For generated products, let language and light/dark appearance follow the system until the user explicitly selects an override. Match supported system locales and fall back to English when none match; persist only explicit overrides, and clear them when the user returns to “follow system.”
 - Use iOS-style alert, confirmation, and action-sheet presentation by default unless the approved product design explicitly requires another convention.
 - Preserve unrelated work and existing project conventions. Inspect the Git root, branch, dirty state, Flutter/FVM version, lockfiles, targets, and existing product capabilities before editing.
@@ -55,7 +56,7 @@ Never implement a concept that fails the originality gate. Return it for product
 
 - Use `scripts/bootstrap_factory_run.py` to initialize the selected scope's honest `not_evaluated` documents from `assets/templates/`; never treat generated scaffolds as evidence.
 - After the implementation/revision loop is frozen, use `scripts/flutter_quality_gate.py` for non-mutating format checks, analyzer, tests, and only the locally requested builds.
-- A passing quality-gate script is not UI or runtime acceptance. Before calling an MVP complete, execute the app's core path and inspect the rendered screens, including content stress, overlays, and safe areas; record any untested device/locale/state explicitly.
+- A passing quality-gate script is not UI or runtime acceptance. Before calling an MVP complete, inspect the installed App Icon, cold launch, first-run onboarding, returning-user launch, and the app's core path on rendered targets, including content stress, overlays, and safe areas; record any untested platform/device/locale/state explicitly.
 - Only for `release_candidate`, before Store Reviewer writes the final assessment, use `scripts/flutter_release_preflight.py` to record mechanical release blockers, hashes, archive contents, privacy manifests, identifiers, icon, and screenshot properties.
 - Do not use `--force` to replace existing project reports unless their replacement is intentional and reviewed.
 - Script results inform reviewers but never decide originality, legal compliance, live URL content, device behavior, or store approval.

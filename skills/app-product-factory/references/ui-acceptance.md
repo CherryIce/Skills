@@ -10,6 +10,13 @@ Specify a content policy for filenames, translated labels, user-entered text, co
 
 Unless the PRD explicitly overrides the factory defaults, design the initial experience with no stored language or appearance override: Chinese system locales resolve to the supported Chinese localization, other supported locales resolve to their matching localization, unsupported locales fall back to English, and appearance follows system light/dark changes. Only a user's explicit language or appearance selection is retained; choosing “follow system” clears the retained override. Default alert, confirmation, destructive-choice, and action-sheet surfaces to an iOS/Cupertino visual hierarchy.
 
+## Brand and first-run acceptance
+
+- App Icon: use an original, product-specific symbol and color treatment with documented source/rights. Reject Flutter's default icon, competitor-derived artwork, unreadable fine detail, or a design that fails common platform masks. Inspect the installed result on every generated platform, not only the source image.
+- Native launch: verify the cold-launch presentation appears before Flutter, matches the first screen's background and current light/dark appearance where supported, and transitions without a blank flash, duplicate branding screen, fake progress, or intentional delay. Do not put localized or changing copy on the native launch screen.
+- Onboarding: present it after launch only for the intended first-run cohort. Keep it concise, localized, accessible, truthful, and skippable; avoid asking for nonessential permissions before context exists. Verify skip and completion survive relaunch, later launches reach the product directly, and Settings/Help can replay onboarding without changing the completed state.
+- Existing-user migration: when onboarding is added to a released app, exercise the approved migration with representative existing storage so current users are not unexpectedly trapped in a new first-run flow.
+
 ## Rendered-screen acceptance
 
 Inspect the actual running UI, not just source, theme tokens, or a passing widget tree. Choose a small matrix from the supported product surfaces:
@@ -18,6 +25,7 @@ Inspect the actual running UI, not just source, theme tokens, or a passing widge
 - each primary launch language, light/dark appearance, and large text where supported;
 - empty, typical, dense/long-content, error, and completed states of the core path;
 - bottom navigation/actions, scroll end, keyboard visible, and modal or sheet states when present.
+- cold launch, first onboarding page, skip/complete destination, returning-user launch, and replay entry.
 
 For each relevant case, check that the primary task and next action are obvious, required content is readable, controls do not collide or clip, all actions remain reachable by scrolling or navigation, safe areas and keyboard do not cover controls, and the layout remains balanced without excessive blank or repeated chrome. Inspect the visible screen and the scrolled end; the first viewport alone cannot prove reachability. A screenshot supports visual review only for the state and build it depicts.
 

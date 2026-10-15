@@ -34,9 +34,9 @@ If the working directory contains concepts rather than a Flutter app, preserve t
 
 For a greenfield app, use Flutter's own scaffold with explicit platforms, organization placeholder, and project name derived from intake. Record that a placeholder organization or Bundle ID is a release blocker. Add only dependencies required by the approved core loop.
 
-Implement domain model and repository boundaries before UI breadth. Exercise cancellation, invalid input, partial state, save failures, recovery, destructive actions, re-evaluation after changes, and bounded resource usage. Run focused tests during each slice.
+Implement domain model and repository boundaries before UI breadth. In the first implementation slice, replace Flutter's default icon with original platform icon assets, configure native iOS/Android launch presentation, and add the localized first-run onboarding state machine with skip, completion, relaunch, and replay behavior. Preserve the source asset or reproducible icon input. Exercise cancellation, invalid input, partial state, save failures, recovery, destructive actions, re-evaluation after changes, and bounded resource usage. Run focused tests during each slice.
 
-Before treating a screen as finished, review a rendered state against the PRD's information hierarchy and the cases in `ui-acceptance.md`. Include realistic and stress content, not only the empty/default state. Verify the clean-state system language/appearance behavior, English fallback, explicit-override persistence, scroll-end safe inset, and default iOS-style dialogs where applicable. For new sheets or dialogs, add a widget regression that opens, dismisses during normal interaction, waits for the transition, and reopens without an exception or data change.
+Before treating a screen as finished, review a rendered state against the PRD's information hierarchy and the cases in `ui-acceptance.md`. Include realistic and stress content, not only the empty/default state. Verify the installed icon, native cold launch, first-run onboarding, returning-user launch, replay path, clean-state system language/appearance behavior, English fallback, explicit-override persistence, scroll-end safe inset, and default iOS-style dialogs where applicable. For new sheets or dialogs, add a widget regression that opens, dismisses during normal interaction, waits for the transition, and reopens without an exception or data change.
 
 ## 4. Functional review and revision
 
@@ -84,7 +84,7 @@ If a step fails, fix only the relevant scope and run a new timestamped gate. Do 
 
 ## 6. Runtime evidence
 
-Launch the frozen build on the smallest relevant simulator/device matrix. At minimum, inspect phone and tablet layouts when both are supported, primary language variants, dark mode, large text, empty/data/error states, and the full core loop. Inspect dense/long content, keyboard and overlay dismissal, scroll reachability, and bottom safe areas where present. For platform integrations, add physical-device evidence when simulator behavior is insufficient.
+Launch the frozen build on the smallest relevant simulator/device matrix. At minimum, inspect the installed App Icon, cold launch before Flutter, clean-install onboarding, skip/completion followed by relaunch, onboarding replay, phone and tablet layouts when both are supported, primary language variants, dark mode, large text, empty/data/error states, and the full core loop. Inspect dense/long content, keyboard and overlay dismissal, scroll reachability, and bottom safe areas where present. For platform integrations, add physical-device evidence when simulator behavior is insufficient.
 
 Capture screenshots only after the intended state is visible and the last relevant UI change is built. Record device ID, OS, build mode, app version, action path, result, timestamp, and limitations. A simulator capture is runtime evidence, not automatically valid App Store marketing material. If another task uses the device, isolate the destination or mark runtime evidence unavailable rather than risking a misleading termination.
 

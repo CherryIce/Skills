@@ -17,6 +17,9 @@ Each finding includes the affected requirement/flow, evidence, file or screen wh
 
 - Every advertised core task can be started, completed, canceled, retried, and recovered.
 - State persists correctly across relaunch, backgrounding, rotation, interruption, and migration where relevant.
+- Generated platform targets contain an original non-default App Icon; the installed icon remains legible within platform masks and matches the reviewed product identity.
+- Native launch appears before Flutter without fake loading or delay, remains visually continuous with the first frame, and does not act as a second onboarding or advertising screen.
+- First-run onboarding is localized, accessible, truthful, concise, and skippable. Skip/completion survives relaunch, returning users reach the product directly, replay is available without resetting completion, and existing-user migration behaves as approved.
 - Empty, loading, partial, stale, error, permission-denied, offline, and destructive-action states are understandable.
 - Data import/export, backup/restore, deletion, and conflict behavior protect user work where the product promises them.
 - Touch targets, contrast, semantics, keyboard/focus, screen readers, text scaling, reduced motion, and orientation are appropriate.

@@ -34,6 +34,9 @@ For each applicable rule, record:
 - review account or approved demo mode exposes the full reviewed functionality;
 - production backend and reviewer path are available;
 - app name, icon, screenshots, description, privacy answers, age rating, review notes, and actual behavior agree;
+- the submitted App Icon is original, replaces framework defaults on all generated targets, survives platform masking, and matches the installed/archive asset;
+- the native launch experience uses the supported platform mechanism, does not simulate loading or advertising, and transitions cleanly into the actual first screen;
+- onboarding does not block access unnecessarily, makes only supported claims, defers permissions to context, and has verified skip/completion persistence and returning-user behavior;
 - privacy policy and support URLs are public, accurate, durable, and accessible in-app where required;
 - permission strings and privacy manifests match actual SDK and API behavior;
 - account deletion, Sign in with Apple requirements, IAP visibility/restore, and UGC controls are complete when applicable;

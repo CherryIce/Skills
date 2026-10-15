@@ -57,6 +57,9 @@ Produce the smallest PRD that fully describes:
 - accessibility, Dynamic Type, dark mode, localization, empty/loading/error/offline states;
 - initial system-following locale/appearance, English fallback, and persistence only after explicit user overrides;
 - iOS-style dialog/action-sheet defaults and any justified product-specific exception;
+- an original App Icon direction and rights/source record, including platform masks and small-size legibility;
+- a native launch screen that is visually continuous with the first app screen and contains no fake progress, advertising, dynamic/localized copy, or artificial delay;
+- a short localized onboarding flow after launch, with skip/complete behavior, persisted first-run state, an in-app replay path, and migration behavior for existing users when retrofitting a released product;
 - analytics only if necessary and disclosed;
 - acceptance criteria traceable to the core loop.
 
@@ -64,7 +67,7 @@ Create an original visual direction. Do not reproduce a competitor screenshot or
 
 Before coding, specify the task-first information hierarchy and how long labels, real data volume, empty states, bottom controls, keyboard, and modal content remain readable and reachable. For scrollable pages, design a dynamic trailing content inset that keeps the final content above the system gesture region without partitioning the viewport with fixed blank space. Use [ui-acceptance.md](ui-acceptance.md) to turn the design into observable acceptance cases; a color palette or theme file alone is not a layout design.
 
-Gate: each core claim maps to an interaction, state, data owner, and acceptance criterion; the UI cases cover content density and reachability on the supported form factors.
+Gate: each core claim maps to an interaction, state, data owner, and acceptance criterion; the UI cases cover content density and reachability on the supported form factors, and the icon/launch/onboarding acceptance cases are defined before implementation.
 
 ## Phase 5: Flutter MVP
 
@@ -72,7 +75,7 @@ Implement vertical slices, starting with the smallest end-to-end loop. Keep gene
 
 For each new navigation or overlay pattern, exercise the user action sequence through completion, cancel, dismiss, and re-entry. Run automated tests for meaningful transitions and inspect the actual rendered result; analyzer/build success cannot close layout or lifecycle findings.
 
-Gate: the core loop builds, launches, persists or transmits data as designed, has meaningful automated coverage, and has a recorded UI/runtime inspection for its primary screens. If a required device or state cannot be inspected, mark that evidence layer untested rather than passing it.
+Gate: the core loop builds, launches, persists or transmits data as designed, has meaningful automated coverage, and has a recorded UI/runtime inspection for its primary screens. The generated app also has non-default platform App Icon assets, native launch configuration, and a working first-run onboarding path whose skip/complete state survives relaunch. If a required platform, device, or state cannot be inspected, mark that evidence layer untested rather than passing it.
 
 ## Phase 6: Independent reviews
 
@@ -88,7 +91,7 @@ Gate: the revision has observable acceptance criteria and does not introduce a n
 
 ## Phase 8: Release-candidate evidence
 
-Verify production identifiers and icons, signing assumptions, privacy manifests and declarations, public privacy/support URLs, metadata, screenshots, reviewer access, backend availability, on-device behavior, archive contents, and any IAP products.
+Verify production identifiers and original App Icon assets, native launch configuration, onboarding behavior, signing assumptions, privacy manifests and declarations, public privacy/support URLs, metadata, screenshots, reviewer access, backend availability, on-device behavior, archive contents, and any IAP products.
 
 Gate: “release candidate” only. Uploading, submitting, pricing, agreements, certificates, and production mutations require explicit user confirmation.
 

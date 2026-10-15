@@ -91,6 +91,10 @@ class LearningTests(unittest.TestCase):
             brief = (project / "docs/product/PRODUCT_BRIEF.md").read_text(encoding="utf-8")
             self.assertIn("默认跟随系统；匹配支持的系统语言，无法匹配时回退英文", brief)
             self.assertIn("默认跟随系统 light/dark", brief)
+            self.assertIn("替换 iOS/Android 的 Flutter 默认图标", brief)
+            self.assertIn("iOS/Android 原生启动页", brief)
+            self.assertIn("首次安装可跳过", brief)
+            self.assertIn("默认不强制既有用户重新进入引导", brief)
             self.assertIn("滚动视口使用可用空间", brief)
             self.assertIn("默认使用 iOS/Cupertino 风格弹框", brief)
 

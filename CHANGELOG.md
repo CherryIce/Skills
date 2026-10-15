@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.5.0 — 2026-10-15
+
+- Require every generated MVP/release candidate to include an original non-default App Icon across its Flutter platform targets.
+- Require a platform-native launch experience that is immediate, appearance-aware, and visually continuous with the first Flutter frame.
+- Require localized, skippable first-run onboarding with persisted skip/completion, returning-user routing, replay, failure coverage, and an explicit existing-user migration policy.
+- Add icon, launch, and onboarding fields and evidence rows to the intake, product brief, functional review, App Store preflight, and evidence register templates.
+
 ## v1.4.0 — 2026-10-15
 
 - Publish `app-store-release-kit` with per-app fact collection, listing drafts, real-runtime screenshot rendering, bilingual website and privacy templates, and a release-material validation gate.
