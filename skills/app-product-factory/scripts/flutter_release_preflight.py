@@ -155,6 +155,76 @@ def bundle_identifiers(project: Path) -> list[str]:
     )
 
 
+def normalize_export_compliance_value(value: Any) -> bool | None:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        normalized = value.strip().strip('"').lower()
+        if normalized in {"no", "false"}:
+            return False
+        if normalized in {"yes", "true"}:
+            return True
+    return None
+
+
+def source_export_compliance_facts(project: Path) -> dict[str, Any]:
+    """Read the effective source declaration without deciding its legal accuracy."""
+    key = "ITSAppUsesNonExemptEncryption"
+    plist_path = project / "ios" / "Runner" / "Info.plist"
+    project_path = project / "ios" / "Runner.xcodeproj" / "project.pbxproj"
+    facts: dict[str, Any] = {
+        "key": key,
+        "plist_path": str(plist_path),
+        "project_path": str(project_path),
+        "source": None,
+        "value": None,
+        "is_false": False,
+    }
+
+    if plist_path.is_file():
+        try:
+            with plist_path.open("rb") as stream:
+                info = plistlib.load(stream)
+            if key in info:
+                value = info[key]
+                facts.update(
+                    {
+                        "source": "Info.plist",
+                        "value": value,
+                        "is_false": isinstance(value, bool) and value is False,
+                    }
+                )
+                return facts
+        except (OSError, plistlib.InvalidFileException) as error:
+            facts["plist_error"] = str(error)
+
+    if project_path.is_file():
+        text = project_path.read_text(encoding="utf-8", errors="replace")
+        raw_values = re.findall(
+            r"\bINFOPLIST_KEY_ITSAppUsesNonExemptEncryption\s*=\s*([^;]+);", text
+        )
+        generate_values = re.findall(r"\bGENERATE_INFOPLIST_FILE\s*=\s*([^;]+);", text)
+        normalized_values = [normalize_export_compliance_value(value) for value in raw_values]
+        generated = bool(generate_values) and all(
+            str(value).strip().strip('"').upper() == "YES" for value in generate_values
+        )
+        facts["build_setting_values"] = [value.strip().strip('"') for value in raw_values]
+        facts["generate_infoplist_values"] = [
+            value.strip().strip('"') for value in generate_values
+        ]
+        if generated and normalized_values and all(
+            value is normalized_values[0] and value is not None for value in normalized_values
+        ):
+            facts.update(
+                {
+                    "source": "Xcode build setting",
+                    "value": normalized_values[0],
+                    "is_false": normalized_values[0] is False,
+                }
+            )
+    return facts
+
+
 def flutter_version_facts(project: Path) -> dict[str, str | None]:
     pubspec = project / "pubspec.yaml"
     text = pubspec.read_text(encoding="utf-8", errors="replace")
@@ -295,6 +365,7 @@ def inspect_archive(
                     "DTXcode",
                     "DTSDKName",
                     "CFBundleDevelopmentRegion",
+                    "ITSAppUsesNonExemptEncryption",
                 )
             }
             add_check(
@@ -303,6 +374,24 @@ def inspect_archive(
                 "pass",
                 "Archive Info.plist was parsed.",
                 facts["info"],
+            )
+            archive_declaration = info.get("ITSAppUsesNonExemptEncryption")
+            archive_declaration_ok = (
+                isinstance(archive_declaration, bool) and archive_declaration is False
+            )
+            add_check(
+                checks,
+                "archive_export_compliance_declaration",
+                "pass" if archive_declaration_ok else "blocker",
+                "Archive declares ITSAppUsesNonExemptEncryption=false."
+                if archive_declaration_ok
+                else (
+                    "Archive declares non-exempt encryption; complete the separate export-compliance determination and documentation."
+                    if archive_declaration is True
+                    else "Archive is missing a Boolean ITSAppUsesNonExemptEncryption=false declaration."
+                ),
+                {"path": str(info_path), "value": archive_declaration},
+                "The configured value does not prove that the app and every linked library were classified correctly.",
             )
         except (OSError, plistlib.InvalidFileException) as error:
             add_check(checks, "archive_info", "blocker", f"Invalid archive Info.plist: {error}")
@@ -510,6 +599,24 @@ def main() -> int:
         else "No common MVP/prototype/demo wording was found in the scanned app-facing source types.",
         {"hits": word_hits, "scanned_suffixes": sorted(SOURCE_SUFFIXES)},
         "This bounded source scan does not inspect remote content, generated store metadata, or every possible asset format.",
+    )
+
+    source_export_compliance = source_export_compliance_facts(project)
+    source_declaration_ok = source_export_compliance["is_false"]
+    source_declaration_value = source_export_compliance["value"]
+    add_check(
+        checks,
+        "source_export_compliance_declaration",
+        "pass" if source_declaration_ok else "blocker",
+        "Source config declares ITSAppUsesNonExemptEncryption=false."
+        if source_declaration_ok
+        else (
+            "Source config declares non-exempt encryption; do not change it to false without evidence and complete the separate compliance path."
+            if source_declaration_value is True
+            else "Source config is missing an effective Boolean ITSAppUsesNonExemptEncryption=false declaration."
+        ),
+        source_export_compliance,
+        "The configured value does not establish the legal classification of app code or linked libraries.",
     )
 
     icon = project / "ios" / "Runner" / "Assets.xcassets" / "AppIcon.appiconset" / "Icon-App-1024x1024@1x.png"

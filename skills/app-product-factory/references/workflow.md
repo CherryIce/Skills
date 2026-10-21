@@ -60,6 +60,7 @@ Produce the smallest PRD that fully describes:
 - an original App Icon direction and rights/source record, including platform masks and small-size legibility;
 - a native launch screen that is visually continuous with the first app screen and contains no fake progress, advertising, dynamic/localized copy, or artificial delay;
 - a short localized onboarding flow after launch, with skip/complete behavior, persisted first-run state, an in-app replay path, and migration behavior for existing users when retrofitting a released product;
+- for an iOS target, the app and linked-library encryption inventory, the resulting export-compliance determination, and `ITSAppUsesNonExemptEncryption = false` only when no non-exempt encryption is present;
 - analytics only if necessary and disclosed;
 - acceptance criteria traceable to the core loop.
 
@@ -91,7 +92,7 @@ Gate: the revision has observable acceptance criteria and does not introduce a n
 
 ## Phase 8: Release-candidate evidence
 
-Verify production identifiers and original App Icon assets, native launch configuration, onboarding behavior, signing assumptions, privacy manifests and declarations, public privacy/support URLs, metadata, screenshots, reviewer access, backend availability, on-device behavior, archive contents, and any IAP products.
+Verify production identifiers and original App Icon assets, native launch configuration, onboarding behavior, the iOS export-compliance determination and final Archive declaration, signing assumptions, privacy manifests and declarations, public privacy/support URLs, metadata, screenshots, reviewer access, backend availability, on-device behavior, archive contents, and any IAP products.
 
 Gate: “release candidate” only. Uploading, submitting, pricing, agreements, certificates, and production mutations require explicit user confirmation.
 

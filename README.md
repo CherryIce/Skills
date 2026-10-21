@@ -39,13 +39,13 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
   --path skills/app-store-release-kit
 ```
 
-To install the immutable `v1.5.0` release instead of the latest `main` branch,
-add `--ref v1.5.0` to either command. For example:
+To install the immutable `v1.6.0` release instead of the latest `main` branch,
+add `--ref v1.6.0` to either command. For example:
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
   --repo CherryIce/Skills \
-  --ref v1.5.0 \
+  --ref v1.6.0 \
   --path skills/app-product-factory
 ```
 

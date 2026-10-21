@@ -30,6 +30,7 @@ Each finding includes the affected requirement/flow, evidence, file or screen wh
 - Scrollable pages use a dynamic trailing inset so the last content/action clears the current bottom system gesture region without a permanent blank partition or double-counted bottom padding.
 - Default alert, confirmation, destructive-choice, and action-sheet surfaces use the specified iOS-style hierarchy and retain correct localization, semantics, dismissal, focus, and reopen behavior.
 - Permissions are requested just in time, have complete purpose strings, and have usable denial alternatives when possible.
+- For iOS, the export-compliance declaration matches the app and linked-library encryption inventory; `ITSAppUsesNonExemptEncryption` is Boolean `false` only when no non-exempt encryption is present, and the effective Archive value is inspected before release.
 - Account creation, authentication, logout, deletion, and credential revocation are internally consistent when present.
 - Purchases, subscriptions, restore, entitlement loss, cancellation, and offline receipt states are correct when present.
 - User-generated content includes the necessary moderation, reporting, blocking, and age controls when present.

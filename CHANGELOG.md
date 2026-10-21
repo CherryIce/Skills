@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.6.0 — 2026-10-21
+
+- Require generated iOS targets to declare `ITSAppUsesNonExemptEncryption=false` when the app and linked libraries use no encryption or only exempt encryption.
+- Block false declarations when non-exempt encryption is present or cannot be ruled out, and require a separate export-compliance determination.
+- Add source/Archive declaration evidence to product, functional-review, App Store preflight, evidence-register, and review-notes templates.
+- Extend the mechanical release preflight with source and final Archive checks for the effective Boolean declaration.
+
 ## v1.5.0 — 2026-10-15
 
 - Require every generated MVP/release candidate to include an original non-default App Icon across its Flutter platform targets.

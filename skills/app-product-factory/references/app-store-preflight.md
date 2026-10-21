@@ -39,6 +39,7 @@ For each applicable rule, record:
 - onboarding does not block access unnecessarily, makes only supported claims, defers permissions to context, and has verified skip/completion persistence and returning-user behavior;
 - privacy policy and support URLs are public, accurate, durable, and accessible in-app where required;
 - permission strings and privacy manifests match actual SDK and API behavior;
+- for iOS, app and linked-library encryption use has been reviewed; the effective source and Archive `ITSAppUsesNonExemptEncryption` value is Boolean `false` only when the app uses no encryption or only exempt encryption, otherwise the required App Store Connect declaration/documentation remains blocked for completion;
 - account deletion, Sign in with Apple requirements, IAP visibility/restore, and UGC controls are complete when applicable;
 - identifiers, entitlements, signing, minimum OS, symbols, and archive contents match the intended release;
 - assets, fonts, content, data, and third-party services have documented usage rights;

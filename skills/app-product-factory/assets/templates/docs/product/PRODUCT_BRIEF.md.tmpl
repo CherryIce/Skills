@@ -22,6 +22,7 @@
 | 原生启动体验 | {{LAUNCH_EXPERIENCE}} |
 | 首次引导行为 | {{ONBOARDING_BEHAVIOR}} |
 | 既有用户引导迁移 | {{EXISTING_USER_ONBOARDING}} |
+| iOS 加密出口合规 | {{IOS_EXPORT_COMPLIANCE}} |
 | 滚动页底部安全区 | {{SCROLL_BOTTOM_INSET}} |
 | 弹框风格 | {{DIALOG_STYLE}} |
 | 变现 | {{MONETIZATION}} |
@@ -80,6 +81,7 @@
 | FR-08 | App Icon | 使用原创、产品相关且权利清晰的源资产替换全部生成平台的 Flutter 默认图标；平台遮罩与代表性尺寸下清晰，并核对安装后图标 | 源资产 + 平台配置 + 模拟器/设备 |
 | FR-09 | 原生启动体验 | iOS/Android 在 Flutter 首帧前显示原生启动页；与首屏和当前外观连续，无假进度、广告、动态文案或人为延时 | 平台配置 + 冷启动运行态 |
 | FR-10 | 首次引导 | 首次安装在启动后显示本地化、可跳过的简洁引导；完成/跳过状态持久化，重启直达首页；设置/帮助可重看且不清除完成状态；既有用户按迁移规则处理 | 单元/Widget + 冷启动/重启运行态 |
+| FR-11 | iOS 加密出口合规 | 盘点应用与链接库的加密能力；仅在无加密或只有豁免加密时，将有效 iOS Info.plist 的 `ITSAppUsesNonExemptEncryption` 设为布尔 `false`；否则保留单独合规阻断项；最终 Archive 值与决定一致 | 源配置 + 依赖清单 + Archive Info.plist + 人工合规复核 |
 
 ## 视觉方向
 
