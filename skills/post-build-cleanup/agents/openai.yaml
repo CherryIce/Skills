@@ -1,0 +1,6 @@
+interface:
+  display_name: "构建验证后清理"
+  short_description: "构建运行验证结束后清理当前任务缓存，保留源码、依赖、验证证据及交付产物"
+  default_prompt: "使用 $post-build-cleanup，在构建、测试和运行验证结束后清理当前任务可再生的构建数据，并报告释放空间。"
+policy:
+  allow_implicit_invocation: true

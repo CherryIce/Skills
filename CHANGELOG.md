@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.7.0 — 2026-10-22
+
+- Publish `post-build-cleanup` for task-scoped cleanup after build, test, and runtime validation.
+- Preserve source, uncommitted work, dependency caches, SDKs, signing material, deliverables, and required diagnostic evidence; skip data still in use.
+- Include a preview-first cleanup helper with explicit apply, project/path checks, Git protection, symlink guards, protected-path checks, and retained-path exclusions.
+- Add 17 isolated behavior tests covering actual cleanup and refusal cases.
+- Document installation, explicit/implicit invocation, and an optional global `AGENTS.md` instruction.
+
 ## v1.6.0 — 2026-10-21
 
 - Require generated iOS targets to declare `ITSAppUsesNonExemptEncryption=false` when the app and linked libraries use no encryption or only exempt encryption.
