@@ -167,6 +167,67 @@ class CleanupTests(unittest.TestCase):
                 obj.unlink()
                 obj.parent.rmdir()
 
+    def test_index_products_blocks_whole_tree_even_without_keep_flag(self):
+        obj = self.file(".codex-build/Index.noindex/Build/Intermediates.noindex/obj.o")
+        artifact = self.file(".codex-build/Index.noindex/Build/Products/Foo.framework/Foo")
+        root = self.project / ".codex-build/Index.noindex"
+        self.assert_refused(root)
+        self.assertTrue(obj.exists())
+        self.assertEqual(artifact.read_text(), "fixture")
+
+    def test_narrow_intermediates_cleanup_preserves_nested_products(self):
+        obj = self.file(".codex-build/Index.noindex/Build/Intermediates.noindex/obj.o")
+        artifact = self.file(".codex-build/Index.noindex/Build/Products/Foo.framework/Foo")
+        products = artifact.parents[1]
+        code, report = self.run_cleanup(obj.parent, apply=True, keep=[products])
+        self.assertEqual(code, 0, report)
+        self.assertFalse(obj.exists())
+        self.assertEqual(artifact.read_text(), "fixture")
+
+    def test_frameworks_symbols_archives_and_packages_are_retained(self):
+        for index, relative in enumerate(["Foo.framework/Foo", "Foo.xcframework/Info.plist",
+                         "Foo.dSYM/Contents/Resources/DWARF/Foo", "Foo.app/Foo",
+                         "Foo.xcarchive/Info.plist", "Foo.xcresult/Info.plist",
+                         "release.ipa", "release.apk", "release.aab", "libFoo.a"]):
+            with self.subTest(relative=relative):
+                target = self.project / "build" / ("case-" + str(index))
+                artifact = self.file(str(target.relative_to(self.project)) + "/" + relative)
+                self.assert_refused(target)
+                self.assertTrue(artifact.exists())
+
+    def test_direct_artifact_subtrees_cannot_bypass_retention(self):
+        obj = self.file("build/Foo.framework/Objects/obj.o")
+        self.assert_refused(obj.parent)
+        self.assertTrue(obj.exists())
+        product = self.file("build/Index.noindex/Build/Products/plain/obj.o")
+        self.assert_refused(product.parent)
+        self.assertTrue(product.exists())
+
+    def test_downloaded_packages_and_diagnostic_evidence_are_retained(self):
+        for index, relative in enumerate(["SourcePackages/checkouts/lib/source.swift", "Logs/build.txt",
+                         "test-results/result.xml", "screenshots/run.png",
+                         "validation.xcactivitylog", "validation.log", "signing/key.pem"]):
+            with self.subTest(relative=relative):
+                target = self.project / "build" / ("case-" + str(index))
+                artifact = self.file(str(target.relative_to(self.project)) + "/" + relative)
+                self.assert_refused(target)
+                self.assertTrue(artifact.exists())
+
+    def test_protected_names_are_case_insensitive(self):
+        product = self.file("build/index/BUILD/pRoDuCtS/plain/obj.o")
+        self.assert_refused(product.parent)
+        dependency = self.file("build/sourcepackages/checkouts/lib/source.swift")
+        self.assert_refused(dependency.parent)
+        self.assertTrue(product.exists())
+        self.assertTrue(dependency.exists())
+
+    def test_artifact_refusal_prevents_other_batch_deletions(self):
+        obj = self.file("build/intermediate/obj.o")
+        artifact = self.file(".codex-build/cache/App.framework/App")
+        self.assert_refused(obj.parent, self.project / ".codex-build/cache")
+        self.assertTrue(obj.exists())
+        self.assertTrue(artifact.exists())
+
     def test_non_git_project_is_supported(self):
         other = self.base / "non-git-project"
         other.mkdir()

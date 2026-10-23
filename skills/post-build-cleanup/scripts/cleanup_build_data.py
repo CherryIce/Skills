@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Preview or remove explicitly selected, project-local disposable build trees."""
+"""Preview/remove explicit project-local build trees after caller activity checks."""
 
 import argparse
 import json
@@ -18,8 +18,16 @@ class Refused(ValueError):
 PROTECTED = {
     ".git", ".fvm", ".pub-cache", ".venv", "venv", "Pods", "vendor",
     ".swiftpm", "outputs", "artifacts", "releases", "node_modules",
+    "Products", "SourcePackages", "Logs", "logs", "Reports", "reports",
+    "test-results", "screenshots",
 }
-SIGNING_SUFFIXES = {".p12", ".pfx", ".jks", ".keystore", ".mobileprovision"}
+PROTECTED_NAMES = {name.casefold() for name in PROTECTED}
+SIGNING_SUFFIXES = {".p12", ".pfx", ".jks", ".keystore", ".mobileprovision", ".pem", ".key", ".cer"}
+ARTIFACT_SUFFIXES = {
+    ".app", ".framework", ".xcframework", ".dsym", ".xcarchive", ".xcresult",
+    ".ipa", ".apk", ".aab", ".aar", ".jar", ".a", ".dylib", ".so", ".dll",
+    ".log", ".xcactivitylog",
+}
 
 
 def literal_path(value):
@@ -87,10 +95,12 @@ def scan_tree(target):
         current = Path(directory)
         entries = [(current, False)] + [(current / name, True) for name in dirs + files]
         for entry, is_child in entries:
-            if is_child and entry.name in PROTECTED:
+            if is_child and entry.name.casefold() in PROTECTED_NAMES:
                 raise Refused("contains protected data: " + str(entry))
             if entry.suffix.lower() in SIGNING_SUFFIXES:
                 raise Refused("contains signing material: " + str(entry))
+            if entry.suffix.lower() in ARTIFACT_SUFFIXES:
+                raise Refused("contains artifact or evidence requiring retention: " + str(entry))
             info = entry.lstat()
             if info.st_dev != base_device or (is_child and os.path.ismount(entry)):
                 raise Refused("contains a different filesystem or mount: " + str(entry))
@@ -109,9 +119,11 @@ def inspect(project, raw_target, keep):
     relative = target.relative_to(project)
     parts = relative.parts
     for index, part in enumerate(parts):
-        node_cache = part == "node_modules" and index + 1 < len(parts) and parts[index + 1] == ".cache"
-        if part in PROTECTED and not node_cache:
+        node_cache = part.casefold() == "node_modules" and index + 1 < len(parts) and parts[index + 1].casefold() == ".cache"
+        if part.casefold() in PROTECTED_NAMES and not node_cache:
             raise Refused("protected path component: " + part)
+        if Path(part).suffix.lower() in SIGNING_SUFFIXES | ARTIFACT_SUFFIXES:
+            raise Refused("protected artifact, evidence or signing path component: " + part)
     if not allowed(relative):
         raise Refused("not a recognized build/cache path; use a dedicated .codex-build output")
     for segment in [target, *target.parents]:

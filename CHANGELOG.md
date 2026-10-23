@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.8.0 — 2026-10-23
+
+- Refine `post-build-cleanup` to distinguish actual file handles, memory mappings and related tasks from merely persistent Xcode, SKAgent, SourceKit and build/debug helper processes.
+- Require independent identity/fingerprint and activity observations for previously occupied or deferred caches, with a final pre-delete recheck; active mapped databases override apparently stable metadata.
+- Preserve mixed cache products such as `Index.noindex/Build/Products`, and add case-insensitive helper guards for product/dependency paths plus frameworks, symbols, packages, signing material and diagnostic evidence.
+- Add seven isolated regression tests (24 total), including real narrow cleanup beside retained products and refusal of mixed/artifact batches.
+- Keep shared Xcode cleanup behind explicit scope authorization and separate verification; never create or reactivate automatic follow-up without the user's request.
+
 ## v1.7.0 — 2026-10-22
 
 - Publish `post-build-cleanup` for task-scoped cleanup after build, test, and runtime validation.

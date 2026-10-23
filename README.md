@@ -49,13 +49,13 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
   --path skills/post-build-cleanup
 ```
 
-To install the immutable `v1.7.0` release instead of the latest `main` branch,
-add `--ref v1.7.0` to any command. For example:
+To install the immutable `v1.8.0` release instead of the latest `main` branch,
+add `--ref v1.8.0` to any command. For example:
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
   --repo CherryIce/Skills \
-  --ref v1.7.0 \
+  --ref v1.8.0 \
   --path skills/post-build-cleanup
 ```
 
@@ -98,8 +98,17 @@ other tasks or needed for continued debugging or hot reload, and report the resu
 The skill does not install a background cleanup service or modify `AGENTS.md`
 automatically. Its helper previews explicit project-local directories by default;
 the agent checks ownership, active processes, and retained artifacts before using
-`--apply`. It refuses protected paths, tracked files, nested repositories,
-symlinked targets/ancestors, and overlaps with `--keep` paths.
+`--apply`. For persistent Xcode services and previously occupied caches, the
+skill distinguishes actual handles/memory mappings and project-related tasks
+from process existence, then requires independent stability observations before
+cleanup. See the skill's [occupancy and retention guidance](skills/post-build-cleanup/references/occupancy-and-retention.md).
+
+The helper enforces path/artifact boundaries; it does not probe processes or
+prove cache stability. It refuses protected paths, tracked files, nested
+repositories, signing material, nested `Products`/`SourcePackages`, frameworks,
+symbols, packages, diagnostic evidence, symlinked targets/ancestors, and overlaps
+with `--keep` paths. A mixed cache tree must be split into disposable siblings
+and retained products, including `Index.noindex/Build/Products`.
 
 ## Requirements
 
@@ -145,6 +154,7 @@ skills/
 └── post-build-cleanup/
     ├── SKILL.md
     ├── agents/
+    ├── references/
     └── scripts/
 ```
 
