@@ -1,0 +1,4 @@
+interface:
+  display_name: "设计稿文档整理"
+  short_description: "按参考文档或内置模板整理Figma设计稿并核对页面状态版本和链接"
+  default_prompt: "使用 $figma-design-doc 整理这些 Figma 设计稿：有参考文档时沿用参考格式，没有时使用内置模板，生成含直达链接和覆盖核对结果的 Word 文档。"

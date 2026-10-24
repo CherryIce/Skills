@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.9.0 — 2026-10-24
+
+- Publish `figma-design-doc` for grouped Word directories of selected Figma pages, states, theme/language versions, and development annotations.
+- Follow a supplied reference document when present; otherwise use the bundled Word template automatically, with dynamic groups and versions drawn from the actual designs.
+- Support initial creation, independent coverage/link review, and appending audit results while preserving the latest user notes, link targets, labels, and order.
+- Include a read-only, standard-library DOCX link auditor for relationship hyperlinks, simple fields, and Word/WPS complex fields, plus scope/inventory and preservation checks.
+- Add 18 isolated behavior tests; verify the template and a document generated without a reference through page-by-page visual review.
+- Keep reference-document instructions separate from execution authorization and local link checks separate from live Figma verification.
+
 ## v1.8.0 — 2026-10-23
 
 - Refine `post-build-cleanup` to distinguish actual file handles, memory mappings and related tasks from merely persistent Xcode, SKAgent, SourceKit and build/debug helper processes.

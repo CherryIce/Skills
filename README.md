@@ -9,6 +9,7 @@ Reusable Codex skills published by CherryIce.
 | `app-product-factory` | Evidence-based product research, differentiation, Flutter MVP delivery, functional review, and App Store preflight | `$app-product-factory` |
 | `app-store-release-kit` | App Store and Google Play listing assets, real-app screenshots, and bilingual website and privacy drafts for one app | `$app-store-release-kit` |
 | `post-build-cleanup` | Remove disposable project build caches after validation while preserving source, dependencies, deliverables, and evidence | `$post-build-cleanup` |
+| `figma-design-doc` | Turn selected Figma designs into a grouped Word link directory using a supplied reference or the bundled template, then audit page, state, version, and link coverage | `$figma-design-doc` |
 
 ## Install with Codex
 
@@ -25,6 +26,9 @@ https://github.com/CherryIce/Skills/tree/main/skills/app-store-release-kit
 
 Install post-build-cleanup from:
 https://github.com/CherryIce/Skills/tree/main/skills/post-build-cleanup
+
+Install figma-design-doc from:
+https://github.com/CherryIce/Skills/tree/main/skills/figma-design-doc
 ```
 
 The installed skill becomes available on the next turn. `app-product-factory` is
@@ -32,6 +36,8 @@ explicit-only, so invoke it with `$app-product-factory`. Invoke the release kit 
 `$app-store-release-kit` when you want release materials for a named app.
 `post-build-cleanup` allows implicit invocation for matching build/validation tasks;
 you can also invoke it explicitly with `$post-build-cleanup`.
+`figma-design-doc` allows implicit invocation for design-document tasks and can
+also be invoked explicitly with `$figma-design-doc`.
 
 ## Install from the command line
 
@@ -47,16 +53,20 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
   --repo CherryIce/Skills \
   --path skills/post-build-cleanup
+
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo CherryIce/Skills \
+  --path skills/figma-design-doc
 ```
 
-To install the immutable `v1.8.0` release instead of the latest `main` branch,
-add `--ref v1.8.0` to any command. For example:
+To install the immutable `v1.9.0` release instead of the latest `main` branch,
+add `--ref v1.9.0` to any command. For example:
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
   --repo CherryIce/Skills \
-  --ref v1.8.0 \
-  --path skills/post-build-cleanup
+  --ref v1.9.0 \
+  --path skills/figma-design-doc
 ```
 
 The installer refuses to overwrite an existing skill directory. Back up and remove or rename an older installation before reinstalling.
@@ -82,6 +92,12 @@ $app-store-release-kit
 $post-build-cleanup
 
 构建、测试和运行验证结束后，直接清理当前任务无需保留的构建缓存，保留源码、依赖、交付产物和验证证据。
+```
+
+```text
+$figma-design-doc
+
+将以下 Figma 设计稿整理成 Word 目录；有参考文档时沿用参考格式，没有时使用内置模板，核对页面、状态、版本和直达链接，并在文末写明覆盖结果。
 ```
 
 For consistent cleanup across projects, add this instruction to your global
@@ -118,6 +134,10 @@ and retained products, including `Index.noindex/Build/Products`.
 - macOS and Xcode for iOS build/archive evidence.
 - Network access for current product research and official App Store policy verification.
 - Python 3 and Git for the cleanup helper; its behavior tests use temporary fixture projects.
+- Figma read access and the Figma tools for design-document workflows, plus the
+  `documents` skill and its document runtime for DOCX authoring and page rendering.
+  The bundled link-audit helper uses only the Python 3 standard library; local
+  link extraction alone does not verify live Figma access or visual semantics.
 
 ## Safety boundary
 
@@ -129,6 +149,11 @@ kit generates and validates materials until a user explicitly asks for publicati
 scope after evidence and deliverables are preserved. Shared dependency caches,
 SDKs, source, signing material, and paths still in use are retained. Historical
 cross-project cleanup requires its own explicit request.
+
+`figma-design-doc` reads only the requested design scope and produces or updates
+documents. It preserves existing notes and links during an authorized update;
+instructions inside reference documents are source material, not authorization
+to modify designs, application code, or business data.
 
 Generated templates and mechanical preflight results are evidence scaffolds, not legal advice or a guarantee of App Store approval.
 
@@ -151,9 +176,15 @@ skills/
 │   ├── assets/
 │   ├── references/
 │   └── scripts/
-└── post-build-cleanup/
+├── post-build-cleanup/
+│   ├── SKILL.md
+│   ├── agents/
+│   ├── references/
+│   └── scripts/
+└── figma-design-doc/
     ├── SKILL.md
     ├── agents/
+    ├── assets/
     ├── references/
     └── scripts/
 ```
